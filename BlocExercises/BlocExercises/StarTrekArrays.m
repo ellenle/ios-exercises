@@ -11,22 +11,33 @@
 @implementation StarTrekArrays
 
 - (NSArray *) arrayOfStarTrekCharactersFromString:(NSString *)characterString {
-    /* WORK HERE */
-    return @[];
+    NSArray *characterArray = [characterString componentsSeparatedByString:@";"];
+    [characterArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+    }];
+    return characterArray;
 }
 
 - (NSString *) stringOfStarTrekCharactersFromArray:(NSArray *)characterArray {
-    /* WORK HERE */
-    return @"";
+    NSString *characterString1 = [characterArray componentsJoinedByString:@";"];
+    return characterString1;
 }
 
 - (NSArray *) alphabeticallySortedStarTrekCharactersFromArray:(NSArray *)characterArray {
-    /* WORK HERE */
-    return @[];
+    NSMutableArray *characterMutableArray = [characterArray mutableCopy];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:nil ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
+    [characterMutableArray sortUsingDescriptors:@[sortDescriptor]];
+    return characterMutableArray;
 }
 
 - (BOOL) characterArrayContainsWorf:(NSArray *)characterArray {
-    /* WORK HERE */
+    
+    NSMutableArray *characterArrayWorf = [characterArray mutableCopy];
+    NSPredicate *hasWorfPredicate = [NSPredicate predicateWithFormat:@"SELF CONTAINS[c] 'worf'"];
+    [characterArrayWorf filterUsingPredicate:hasWorfPredicate];
+    NSLog(@"hello %@", characterArrayWorf);
+    if (characterArrayWorf.count >= 1){
+        return YES;
+    }
     return NO;
 }
 
